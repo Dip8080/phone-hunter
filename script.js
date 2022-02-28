@@ -16,11 +16,11 @@ document.getElementById('search_btn').addEventListener('click',()=>{
 
 const showSearchResult = arrayOfObjects =>{
     const parent = document.getElementById('append_search');
-   arrayOfObjects.forEach(object => {
-      console.log(object)
+    parent.textContent='';
+    arrayOfObjects.forEach(object => {
       const newDiv = document.createElement('div')
       newDiv.innerHTML= `
-      <div class="bg-orange-500 rounded shadow-lg p-5">
+      <div onclick="fetchDetails('${object.slug}')" class="bg-orange-500 rounded shadow p-5">
            <div>
                <img src="${object.image}" alt="">
            </div>
@@ -31,3 +31,25 @@ const showSearchResult = arrayOfObjects =>{
    });
 }
 
+const fetchDetails = id =>{
+    fetch( `https://openapi.programming-hero.com/api/phone/${id}`)
+    .then(rcvData=>rcvData.json())
+    .then(data=>showDetails(data.data))
+}
+
+const showDetails = data =>{
+    console.log(data.releaseDate)
+   const parent = document.getElementById('append_details');
+   parent.textContent='';
+   const newDiv =document.createElement('div');
+   newDiv.innerHTML = `
+   <div class="bg-orange-500 rounded shadow p-5">
+   <div>
+       <img src="${data.image}" alt="">
+   </div>
+   <h1>Name :${data.name}</h1>
+   <p>description:${data.releaseDate.slice(0,50)}</p>
+                      `
+    parent.appendChild(newDiv)
+    
+}
