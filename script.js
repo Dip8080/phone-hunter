@@ -28,10 +28,10 @@ const showSearchResult = arrayOfObjects =>{
     const parent2 = document.getElementById('append_details');
     parent2.textContent='';
     parent.textContent='';
-    arrayOfObjects?.forEach(object => {
+    arrayOfObjects.slice(0,20)?.forEach(object => {
       const newDiv = document.createElement('div')
       newDiv.innerHTML= `
-      <div onclick="fetchDetails('${object.slug}')" class="flex justify-center bg-orange-500 rounded shadow p-5">
+      <div onclick="fetchDetails('${object.slug}')" class="flex justify-center bg-cyan-300 rounded shadow p-5">
            <div>
                <img class="py-3" src="${object.image}" alt="">
                <h1>brand : ${object.brand}</h1>
@@ -57,7 +57,7 @@ const showDetails = data =>{
    parent.textContent='';
    const newDiv =document.createElement('div');
    newDiv.innerHTML = `
-   <div class="grid g-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-2  bg-orange-500 rounded shadow p-3">
+   <div class="grid g-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-2  bg-cyan-300 rounded shadow p-3">
    <div class="px-3 mt-6 w-86">
        <img class="" src="${data.image}" alt="">
        <h1 class=" antialiased text-xl mt-2">Brand :<span class="text-xl"> ${data.brand} </span></h1>
